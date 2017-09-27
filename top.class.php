@@ -80,7 +80,7 @@ class Top{
 			$tranObject->Set($k,$v);
 		}
 
-		return $tranObject->TranslateTPL($path,$this->conf['cache'],$flag,$save);	//厉害了这里
+		return $tranObject->TranslateTPL($path,$this->conf['cache'],$flag,$save);
 	}
 
 	public function assign($name,$data){
