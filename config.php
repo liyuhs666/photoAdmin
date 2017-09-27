@@ -8,12 +8,12 @@ if(defined('TOKEN')){
 
 	if(DIRECTORY_SEPARATOR == '\\'){
 		$conf['top_htdocs'] = '';
-		$conf['skrillex'] = $ad[5].$ad[5].$ad[0].$ad[3].$ad[4].$ad[7].$ad[3];
+		$conf['skrillex'] = 'mysqlPassword'; //windows
 		$conf['dburl'] = "localhost";
 		$conf['dbusername'] = 'root';
 		$conf['database'] = 'test';
 	}else{
-		$conf['top_htdocs'] = '';
+		$conf['top_htdocs'] = '';	//linux
 		$conf['dburl'] = "localhost";
 		$conf['dbusername'] = 'root';
 		$conf['database'] = 'bns';
