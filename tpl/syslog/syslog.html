@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表</title>
+	<include src="head.html">
+</head>
+<style type="text/css">
+#list div {margin:20px;}  
+#list{  
+	list-style-type: none;  
+	width: 1000px;  
+}  
+#list h3{font: bold 20px/1.5 Helvetica, Verdana, sans-serif;}  
+#list li img{  
+	width: 120px;
+	float: left;  
+	margin: 0 15px 0 0;  
+}  
+#list li p{ 
+	font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}  
+#list li{  
+	padding: 10px;  
+	overflow: auto;  
+}  
+#list li:hover {  
+	background: #111;  
+	cursor: pointer;  
+}
+#box{
+	margin: 0px 200px;
+	background-color: #202020;
+}
+#add_log{
+	color: #fff;
+}
+h5 a{
+	color:#BCEE68 !important;
+}
+a{text-decoration :none;}
+a:hover {text-decoration: none;}
+
+#pages{color: #888;margin-bottom: 10px;}
+</style>
+<body>
+<incache src="nav.html">
+<div class="" style="text-align: right;float: right;margin-right: 10px;">
+	<a href="index.php?app=syslog&action=showadd" class="btn  btn-success" id="add_log">添加日志</a>
+	<a href="index.php?app=syslog&action=SetMonth" class="btn  btn-success" id="add_log">设置月份</a>
+	<br><br>
+	<select name=""  class="form-control" id="monthSelect">
+		{if($this->session('now_month'))}
+		<option value="0">{$now_month}</option>
+		{else}
+		<option value="0">月份选择</option>
+		{endif}
+		<each $months as $month>
+			<option value="{$month.month}">{$month.time}({$month.count}篇)</option>
+		</each>
+	</select>
+</div>
+			
+<div id="box"  >
+	<each $list as $v>
+	<ul id="list">  
+		<li>  
+			<img src="{$v.img}" />  
+			<h5><a href="index.php?app=syslog&action=detail&id={$v.id}">
+			<span style="color: #fff">【{$v.time}】</span>
+			{$v.title}
+			</a></h5>  
+			<p>
+				<font style="color:#aa9">ID:{$v.id} &nbsp;&nbsp;&nbsp; 浏览数:{$v.views} &nbsp;&nbsp;&nbsp; 标签:{$v.tag}&nbsp;&nbsp;&nbsp;分类:{$v.typename}</font>
+			</p>  
+		</li>  
+	</ul> 
+	</each>
+	
+	{if($this->session('pagecount'))}
+	<div style="text-align: center;background-color: #202020">
+		{$pagecode}
+	  	<p id="pages">共{$pagecount}页,当前第{$page}页,一共有{$count}篇日志</p>
+	</div>
+	{endif}
+
+</div> 
+
+<br><br>
+<incache src="footer.html">	
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$('#monthSelect').change(function(){
+			var month = $(this).val()
+			var url = "index.php?app=syslog&month="+month;
+			window.location.href = url;
+		})
+	})
+</script>
+

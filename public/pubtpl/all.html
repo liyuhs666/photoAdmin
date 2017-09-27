@@ -1,0 +1,27 @@
+<link href="<?php echo __CSS__; ?>/bootstrap.min.css" rel="stylesheet">
+<script src="<?php echo __JS__; ?>/jquery.js"></script>
+<script src="<?php echo __JS__; ?>/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" media="screen and (max-device-width: 768px)" href="__CSS__/moby.css"/>
+<link rel="stylesheet" media="screen and (min-width: 768px)" href="__CSS__/pc.css"/>
+
+<div id="box" class=".container">
+	<div id="menu">
+		<table id="tab">
+			<each $list as $v>
+				<tr>
+					<td class="mu_td">
+						<a href="javascript:void(0)" onclick="Jump('{$v.url}')">{$v.nw_field}</a>
+					</td>
+				</tr>
+			</each>
+		</table>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	function Jump(url){
+		$('#content').attr('src',url);
+	}
+</script>

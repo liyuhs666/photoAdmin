@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin list</title>
+	<?php include __PUBTPL__.'head.html'; ?>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<style type="text/css">
+.bigbox{
+	margin: 0px 200px;
+}
+.block ul li{
+	list-style-type: none;
+}
+.block ul li a{
+	color: #fff;
+}
+.section{
+	padding: 1px;
+	width: 100%;
+	height: 100%;
+}
+.menu{margin-left: 30px}
+.menu,.block{
+	float: left;
+	width: 200px;
+	/*height: 300px;*/
+}
+.block{
+	background-color: #303030;
+}
+.first_title{
+	background-color: #606060;
+	width: 100%;
+	display: block;
+	padding: 5px 0px;
+	padding-left: 5px;
+	text-decoration: none;
+}
+.first_title:hover{
+	text-decoration: none;
+}
+.second_title_ul{
+	background-color: #101010;
+	height: 100%;
+}
+.second_title_ul li a{
+	background-color: #101010;
+	width: 80%;
+	display: block;
+	/*height: 40px;*/
+	line-height: 20px;
+	border-bottom: 1px solid #red;
+	margin-left: 20px;
+}
+.second_title_ul li{
+	height: 30px;
+	line-height: 30px;
+	padding: 5px 0px;
+}
+.label{
+	color: #fff;
+}
+</style>
+</head>
+<body>
+<!-- 网站头 -->
+<?php include TCACHE.'nav.html'; ?>
+
+<div class="menu">
+    <div class="block" id="section-menu">
+        <ul class="section">
+            <li><a class="first_title">操作</a>
+                <ul class="second_title_ul">
+                    <li><a href="javascript:void(0)" id="AddAdminUser">添加管理员</a> </li>
+                    <li><a>权限管理</a> </li>
+                </ul>
+            </li>
+            <li><a class="first_title">个人中心</a>
+                <ul class="second_title_ul">
+                    <li><a>个人资料</a> </li>
+                    <li><a>修改密码</a> </li>
+                    <li><a>我的日志</a> </li>
+                    <li><a>IP管理</a> </li>
+                    <li><a>退出登录</a> </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="content_box">
+	
+	<!-- 1.列表框div -->
+	<div id="list_box">
+		<table id="listtab" class="table">
+			<tr style="line-height: 3em;height: 3em">
+				<th>adminID</th>
+				<th>UserName</th>
+				<th>Group</th>
+				<th>CreateTime</th>
+				<th>IP</th>
+				<th>操作</th>
+			</tr>
+			
+		<?php if(count($this->value['listinfo'])>0){ ?>
+		<?php foreach($this->value['listinfo'] as $this->value['v']){ ?>
+			
+				<tr>
+					<td><?php echo $this->value['v']['uid']; ?></td>
+					<td><?php echo $this->value['v']['uname']; ?></td>
+					<td><?php echo $this->value['v']['group']; ?></td>
+					<td><?php echo $this->value['v']['time']; ?></td>
+					<td><?php echo $this->value['v']['lastip']; ?></td>
+					<td>
+						<a href="index.php?app=admin&action=AdminDetails&uid=<?php echo $this->value['v']['uid']; ?>">修改</a>
+						<a href="index.php?app=admin&action=admindelete&id=<?php echo $this->value['v']['uid']; ?>" onclick="if(confirm('确认?')==false)return false;">删除</a>
+					</td>
+				</tr>
+			<?php } ?><?php } ?>
+		</table>
+
+		<?php if($this->session('pagecount')){ ?>
+		<div style="text-align: center;background-color: #202020">
+			<?php echo $this->value['pagecode']; ?>
+		  	<p id="pages">总共<?php echo $this->value['pagecount']; ?>页,当前第<?php echo $this->value['page']; ?>页</p>
+		</div>
+		<?php } ?>
+	</div>
+
+	<!-- 2.添加框div -->
+	<div id="add_box">
+		<table id="addtab" class="table">
+			<tr style="line-height: 3em;height: 3em">
+				<th class="ptd">项目</th>
+				<th>内容</th>
+			</tr>
+			<tr>
+				<td class="ptd">User</td>
+				<td>
+					<input type="text" name="uname" id="" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td class="ptd">PassWD</td>
+				<td>
+					<input type="password" name="passwd" id="" class="form-control">
+				</td>
+			</tr>
+
+			<tr>
+				<td class="ptd">GroupS</td>
+				<td>
+					<select class="form-control" name="group">
+				      <option>选择管理组</option>
+				      
+		<?php if(count($this->value['groups'])>0){ ?>
+		<?php foreach($this->value['groups'] as $this->value['g']){ ?>
+			
+				      	<option value="<?php echo $this->value['g']['gid']; ?>"><?php echo $this->value['g']['gtext']; ?></option>
+				      <?php } ?><?php } ?>
+				    </select>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="ptd">权限</td>
+				<td>
+					
+		<?php if(count($this->value['adminmenu'])>0){ ?>
+		<?php foreach($this->value['adminmenu'] as $this->value['m']){ ?>
+			
+					<label class="checkbox-inline">
+				        <input type="checkbox" name="ps" value="<?php echo $this->value['m']['nw_field']; ?>"><font class="label"><?php echo $this->value['m']['name']; ?></font>
+				    </label>
+				    <?php } ?><?php } ?>
+
+				</td>
+			</tr>
+
+
+			
+			<tr style="padding-top: 10px">
+				<td class="ptd" style="line-height: 36px">操作</td>
+				<td>
+					<button class="btn" style="width: 45%;margin-top: 5px;" id="admin_add">添加</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- 3.备用div -->
+	
+
+</div>
+
+<?php include TCACHE.'footer.html'; ?>	
+</body>
+</html>
+
+<script type="text/javascript">
+	$(function(){
+		
+		$('#AddAdminUser').click(function(){
+			$('#list_box').hide()
+			$('#add_box').show()
+		})
+
+		$('#admin_add').click(function(){
+			var ps = $("input[name='ps']:checked")
+			var psstr = '';
+			$.each(ps,function(i,item){
+				// var v = item.val()
+				psstr += $(item).val()+',';
+			})
+			
+			var uname  = $("input[name='uname']").val()
+			var passwd = $("input[name='passwd']").val()
+			var group = $("select[name='group']").val()
+			if(!uname || !passwd || !group){
+				alert('Incomplete information');
+				return false;
+			}else{
+				var data = {'uname':uname,'passwd':passwd,'group':group,'psstr':psstr}
+				var url = 'index.php?app=admin&action=_admin_add';
+				$.post(url,data,function(msg){
+					if(msg.state == 0){
+						alert('successful');
+						window.location = "index.php?app=admin";
+					}else{
+						alert('add error');
+					}
+				},'json')
+			}
+		})
+	})
+</script>
+
+<style type="text/css">
+#add_box{
+	display: none;
+}
+#add_box,#list_box{
+	border: 1px solid #ccc;
+	float: left;
+	margin-left: 100px;
+	width: 50%;
+}
+#addtab,#listtab{
+	width: 100%;
+	margin-bottom: 0px;
+}
+#addtab td,#addtab th,#listtab td,#listtab th{
+	text-align: center;
+}
+#addtab td,#listtab td{
+	/*padding-top: 20px;*/
+	 vertical-align:middle;
+	 margin-top: 15px;
+}
+#listtab td{
+	color: #fff;
+	order-right: 1px solid #ccc;
+}
+.ptd{
+	width: 20%;
+	color: #fff;
+	line-height: 4em;
+	border-right: 1px solid #ccc;
+}
+.table tr th{
+	background-color: #707070;
+	color: #fff;
+}
+.table tr{
+	height: 5em;
+	line-height: 5em;
+	overflow: hidden;
+	margin:50px 0;
+}
+</style>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>syslog</title>
+	<include src="head.html">
+</head>
+<style type="text/css">
+#list div {margin:20px;}  
+#list{  
+	list-style-type: none;  
+	width: 1000px;  
+}  
+#list h3{font: bold 20px/1.5 Helvetica, Verdana, sans-serif;}  
+#list li img{  
+	width: 150px;
+	float: left;  
+	margin: 0 15px 0 0;  
+}  
+#list li p{ 
+	font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}  
+#list li{  
+	padding: 10px;  
+	overflow: auto;  
+}  
+#list li:hover {  
+	background: #eee;  
+	cursor: pointer;  
+}
+
+#caozuo,#key{width: 100%;text-align: center;}
+#key{margin-top: 200px;}
+#box{
+	margin: 0px 200px;
+	padding: 1px 50px 150px 50px;
+	background-color: #fff;
+	height: 100%;
+	overflow: auto;
+	zoom:1;
+}
+.navbar{
+	margin-bottom: 5px !important;
+}
+
+</style>
+<body>
+<incache src="nav.html">
+<div id="box">
+	<!-- 3.加密钥匙 -->
+	<div id="other">
+		<div id="key">
+		<input type="text" class="form-control center-block" id="encode_key" placeholder="加密钥匙" style="width: 15%;" >
+		</div>
+		<br>
+
+		<div id="caozuo" >
+			<button  id="getContent" class="btn-success btn-lg">提交</button>	
+		</div>	
+	</div>
+
+	<div style="display: none" id="content">
+		<div>
+			<h3 style="color: #fff;background-color: #909090;margin-top: 50px;line-height: 50px;">&nbsp;&nbsp;{$info.title}</h3><br>
+			<p style="text-align: right;color: #aaa">发布时间:{$info.time}&nbsp;&nbsp;浏览{$info.views}次
+				<a href="index.php?app=syslog&action=deletelog&id={$info.id}" onclick="if(confirm('确定删除?')==false)return false;">删除</a>
+				<a href="index.php?app=syslog&action=editlog&id={$info.id}" id="edit">编辑</a>
+			</p> 
+		</div>
+		<div style="float:right; margin: 10px">
+			<img src="{$info.img}" alt="" width="150px" >
+		</div>
+	</div>
+	
+	<div id="adiv" style="display: none">
+		<p id="auto" style="float: right;font-size: 20px;color: #505050">--{$info.author}</p>
+	</div>
+</div>
+
+<input type="hidden" name="content" value="{$info.id}" id="logid" >
+<input type="hidden" name="uploadkey" value="" id="uploadkey" >
+<incache src="footer.html">	
+</body>
+</html>
+
+<script type="text/javascript">
+$(function(){
+	$('#getContent').click(function(){
+		var key = $('#encode_key').val()
+		var id = $('#logid').val()
+		var data = {'id':id,'key':key}
+
+		$('#uploadkey').val(key)
+		$('#edit').attr('href',$('#edit').attr('href')+'&key='+key);
+
+		$.post('index.php?app=syslog&action=_DecodeContent',data,function(msg){
+				if(msg.state ==1){
+					 $('#content').append(msg.DecodeContent)
+					 $('#content').show()
+					 $('#adiv').show()
+					 $('#other').hide()
+				}else{
+					 alert('密钥错误')
+				}
+				
+			},'json')
+	})
+})
+</script>

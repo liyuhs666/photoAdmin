@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>iframe</title>
+<include src='head.html'>
+<style type='text/css'>
+#box,#ibox,#pbox,#mbox{width: 100%;height: 100%}
+#ibox{height: 600px}
+#ifshow{width: 100%;height: 100%}
+</style>
+</head>
+<body>
+<incache src='nav.html'>
+<div class="panel panel-info" id="box">
+	<div class="panel-body" id="pbox">
+		<div id="menu" id="mbox">
+			<table class="table table-bordered">
+			  <caption>ALlTheList</caption>
+			  <thead>
+			    <tr>
+			      <th>ifield</th>
+			      <th>iname</th>
+			      <th>iurl</th>
+			      <th>操作</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<each $ilist as $i>
+				    <tr>
+				      <td>{$i.iname}</td>
+				      <td>{$i.ifield}</td>
+				      <td><a href="javascript:void(0)" onclick="ShowIFrame('{$i.iurl}')">{$i.iurl}</a></td>
+				      <td><a href="index.php?app=iframe&action=IDelete&id={$i.id}" onclick="return confirm('确认');">删除</a></td>
+				    </tr>
+				</each>
+				
+			  </tbody>
+			</table>
+			<table class="table table-bordered" id="tab2">
+				<form action="index.php?app=iframe&action=iframeadd"  role="form" method="post" class="form-control">
+				    <tr>
+				      <td><input name="ifield" id=""  class="form-control" placeholder="字段(En)"></td>
+				      <td><input name="iname" id="" class="form-control" placeholder="名称(中文)"></td>
+				      <td><input name="iurl" id=""  class="form-control" placeholder="url"></td>
+				      <td><input type="submit" name="submit" id="" value="添加"  class="form-control"></td>
+				    </tr>
+				</form>
+			</table>
+		</div>
+		<div id="ibox">
+			<iframe src="" frameborder="0" id="ifshow"></iframe>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    // function reinitIframe(){
+    //     var iframe = document.getElementById("mainFrame");//id改为你的iframe的id
+    //     try{
+    //         var bHeight = iframe.contentWindow.document.body.scrollHeight;
+    //         var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+    //         var height = Math.max(bHeight, dHeight);
+    //         iframe.height =  height;
+    //     }catch (ex){}
+    // }
+    // window.setInterval("reinitIframe()", 200);
+</script>
+<script type="text/javascript">
+	function ShowIFrame(url){
+		$('#ifshow').attr('src',url);
+	}
+</script>

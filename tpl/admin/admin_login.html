@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin Login</title>
+	<include src="head.html">
+<style type="text/css">
+.bigbox{
+	margin: 0px auto;
+}
+#add_box{
+	border: 1px solid #fff;
+	float: left;
+	margin-left: 360px;
+	width: 50%;
+}
+#addtab{
+	width: 100%;
+	margin-bottom: 0px;
+	border-collapse: collapse;
+}
+#addtab td,#addtab th{
+	text-align: center;
+}
+#addtab td{
+	/*padding-top: 20px;*/
+	 vertical-align:middle;
+	 margin-top: 15px;
+}
+.ptd{
+	width: 20%;
+	color: #fff;
+	line-height: 4em;
+	border-right: 1px solid #fff;
+}
+.table tr th{
+	background-color: #707070;
+	color: #fff;
+}
+.table tr{
+	height: 5em;
+	line-height: 5em;
+	overflow: hidden;
+	margin:50px 0;
+}
+</style>
+</head>
+<body>
+<!-- 网站头 -->
+<incache src="nav.html">
+
+<div class="content_box">
+	
+
+	<!-- 2.添加框div -->
+	<form action="index.php?app=admin&action=adminlogin" method="post">
+	<div id="add_box">
+		<table id="addtab" class="table">
+			<tr style="line-height: 3em;height: 3em">
+				<th class="ptd">项目</th>
+				<th>内容</th>
+			</tr>
+			<tr>
+				<td class="ptd">User</td>
+				<td>
+					<input type="text" name="uname" id="" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td class="ptd">PassWD</td>
+				<td>
+					<input type="password" name="passwd" id="" class="form-control">
+				</td>
+			</tr>
+
+			<tr style="padding-top: 10px">
+				<td class="ptd" style="line-height: 36px">操作</td>
+				<td>
+					<input class="btn" type="submit" style="width: 45%;margin-top: 5px;" value="登录">
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+	<!-- 3.备用div -->
+	
+
+</div>
+
+<incache src="footer.html">	
+</body>
+</html>

@@ -1,0 +1,20 @@
+.top{
+	width: 98%;
+	background: url(../img/header-repeat.jpg) repeat-x;
+	display: inline;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+body{
+    background-color: #369;
+}
+

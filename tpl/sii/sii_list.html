@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sii List</title>
+<include src="head.html">
+<style type="text/css">
+td label{ margin-top: 5px; }
+</style>
+</head>
+<body>
+<incache src="nav.html">
+<table class="table table-bordered">
+
+<caption>表格布局</caption>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>appname</th>
+      <th>说明</th>
+      <th>字段</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+	<each $list as $v>
+		<tr>
+			<td>{$v.id}</td>
+			<td>{$v.appname}</td>
+			<td>{$v.app_comment}</td>
+			<td>{$v.app_field}</td>
+			<td>
+				<a href="index.php?app=sii&action=siidelete&id={$v.id}">删除</a>
+			</td>
+		</tr>
+	</each>
+</table>
+</body>            
+</html>

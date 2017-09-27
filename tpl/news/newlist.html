@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Someone stolen u sweet scoll</title>
+<style type="text/css">
+#box{margin: 5px 5px;}
+#content{padding-top: 0;margin-top: 0}
+</style>
+<include src="head.html">
+<script type="text/javascript">
+	$(function(){
+		var msg = "jquery";
+		console.log(msg);
+	})
+</script>
+</head>
+<body>
+<incache src="nav.html">
+
+<div class="panel panel-primary" id="box">
+    <div  class="panel-heading" style="text-align: center;margin: 0;padding: 0;">
+        <a href="index.php?app=news&action=run" style="color:white;margin-right: 10px;font-size: 18px">run</a>
+        <a href="index.php?app=news&action=show" style="color:white;font-size: 18px">show</a>
+    </div>
+    <div class="panel-body" id="content">
+		<table style="margin: 50px auto;border: 1px #ccc solid;border-collapse: collapse;">
+			<tr>
+				<td style="background: #c00;text-align: center;border: 1px #ccc solid;font-size: 16px;color: #fff;line-height: 18px">{$title}</td>
+			</tr>
+
+			<each $list as $v>
+				<tr>
+					<td style="text-align: center;border: 1px #ccc solid;font-size: 14px;color: #369;line-height: 55px">
+						<a href="{$v.newsurl}">{$v.title}</a>
+					</td>
+				</tr>
+			</each>
+		</table>
+	</div>
+	<incache src="footer.html">	
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>cccc</title>
+
+<include src="head.html">
+<style type="text/css">
+	p{margin-left: 7px;}
+	a{
+		text-decoration:none
+	}
+	.success {
+		background:#00B2EE;
+		border:1px solid;
+		border-color:#009ACD;
+		padding:5px 5px 5px 5px;
+		border-radius: 15px;
+		color:#fff;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		var msg = "jquery";
+		console.log(msg);
+	})
+</script>
+</head>
+<body>
+
+<div name="end" id='end' style="clear:both;margin-top: 10px">
+	<a href="index.php?app=sqltrace&action=del" class="success" >清空log日志文件</a>&nbsp;&nbsp;&nbsp;
+	<a href="index.php?app=sqltrace&action=refresh&t=<?php echo time();?>#end" class="success">刷新页面</a>
+</div>
+
+
+<br>
+{$content}
+<br>
+{$echotime}
+
+<br>
+<div name="end" id='end' style="clear:both;">
+	<a href="index.php?app=sqltrace&action=del" class="success" >清空log日志文件</a>&nbsp;&nbsp;&nbsp;
+	<a href="index.php?app=sqltrace&action=refresh&t=<?php echo time();?>#end" class="success">刷新页面</a>
+
+</div>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+	scroll(0,document.body.scrollHeight);	//使滚动轴滑至最下,以便查看最后一条SQL语句
+});
+</script>

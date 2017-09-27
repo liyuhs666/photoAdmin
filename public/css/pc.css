@@ -1,0 +1,34 @@
+/*menu of page,lef*/
+html,body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+#box{height: 100%;width: 100%}
+#menu{
+	margin: 0;
+	padding: 0;
+	width: 5%;
+	height: 100%;
+	background-color: #69b;
+	float: left;
+}
+a{	color: #fff;}
+table,tr{width: 100%;}
+td{
+	width: 100%;
+	border-bottom: 1px solid #faa;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	margin: 0;padding: 0;
+}
+#page{
+	margin: 0;
+	padding: 0;
+	width: 95%;
+	left: 100px;
+	height: 100%;
+	float: left;
+}
+iframe{width: 100%;height: 100%}

@@ -1,0 +1,11 @@
+body,table{width: 100%}
+#app,#translate{
+	margin: 10px 0px 0px 20px;
+}
+#res{
+	border: 4px solid red;
+	width: 100%;
+	margin: 50px auto;
+	/*border: 1px solid #ccc;*/
+	width: 400px;
+}
